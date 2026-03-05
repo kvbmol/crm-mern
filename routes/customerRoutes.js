@@ -1,9 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { getCustomers, createCustomer, updateCustomer } = require('../controllers/customerController');
+const customerController = require('../controllers/customerController');
 
-router.get('/', getCustomers);
-router.post('/', createCustomer);
-router.patch('/:id', updateCustomer);
+// Customer CRUD Routes
+router.get('/', customerController.getCustomers);
+router.get('/:id', customerController.getCustomer);
+router.post('/', customerController.createCustomer);
+router.put('/:id', customerController.updateCustomer);
+router.delete('/:id', customerController.deleteCustomer);
+
+// Protect ALL customer routes with auth middleware
+router.use(require('../middleware/auth'));
 
 module.exports = router;

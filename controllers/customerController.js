@@ -1,4 +1,4 @@
-const Customer = require('../models/Customer');
+const Customer = require("../models/Customer");
 
 // GET all customers
 exports.getCustomers = async (req, res) => {
@@ -6,7 +6,7 @@ exports.getCustomers = async (req, res) => {
     const customers = await Customer.find().sort({ createdAt: -1 });
     res.json(customers);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch customers' });
+    res.status(500).json({ error: "Failed to fetch customers" });
   }
 };
 
@@ -15,11 +15,11 @@ exports.getCustomer = async (req, res) => {
   try {
     const customer = await Customer.findById(req.params.id);
     if (!customer) {
-      return res.status(404).json({ error: 'Customer not found' });
+      return res.status(404).json({ error: "Customer not found" });
     }
     res.json(customer);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch customer' });
+    res.status(500).json({ error: "Failed to fetch customer" });
   }
 };
 
@@ -37,13 +37,12 @@ exports.createCustomer = async (req, res) => {
 // UPDATE customer
 exports.updateCustomer = async (req, res) => {
   try {
-    const customer = await Customer.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
-    );
+    const customer = await Customer.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
     if (!customer) {
-      return res.status(404).json({ error: 'Customer not found' });
+      return res.status(404).json({ error: "Customer not found" });
     }
     res.json(customer);
   } catch (error) {
@@ -56,10 +55,10 @@ exports.deleteCustomer = async (req, res) => {
   try {
     const customer = await Customer.findByIdAndDelete(req.params.id);
     if (!customer) {
-      return res.status(404).json({ error: 'Customer not found' });
+      return res.status(404).json({ error: "Customer not found" });
     }
-    res.json({ message: 'Customer deleted successfully' });
+    res.json({ message: "Customer deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete customer' });
+    res.status(500).json({ error: "Failed to delete customer" });
   }
 };

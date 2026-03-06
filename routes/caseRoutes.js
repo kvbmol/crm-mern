@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Case = require('../models/case');  // Will create this next
+const Case = require('../models/case'); 
 
 // GET /cases - List all cases with customer data
 router.get('/', async (req, res) => {

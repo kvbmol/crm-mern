@@ -1,22 +1,28 @@
-import { createContext, useReducer, useEffect } from 'react';
-import axios from 'axios';
+import { createContext, useReducer, useEffect } from "react";
+import axios from "axios";
 
-const initialState = { 
-  user: null, 
-  token: localStorage.getItem('token') 
+const initialState = {
+  user: null,
+  token: localStorage.getItem("token"),
 };
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case 'LOGIN': 
-      localStorage.setItem('token', action.payload.token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${action.payload.token}`;
-      return { ...state, user: action.payload.user, token: action.payload.token };
-    case 'LOGOUT': 
-      localStorage.removeItem('token'); 
-      delete axios.defaults.headers.common['Authorization'];
+    case "LOGIN":
+      localStorage.setItem("token", action.payload.token);
+      axios.defaults.headers.common["Authorization"] =
+        `Bearer ${action.payload.token}`;
+      return {
+        ...state,
+        user: action.payload.user,
+        token: action.payload.token,
+      };
+    case "LOGOUT":
+      localStorage.removeItem("token");
+      delete axios.defaults.headers.common["Authorization"];
       return initialState;
-    default: return state;
+    default:
+      return state;
   }
 };
 
@@ -27,7 +33,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (state.token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${state.token}`;
     }
   }, [state.token]);
 

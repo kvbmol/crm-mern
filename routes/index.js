@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 
-// Auth routes (no auth middleware needed)
+// Auth routes 
 router.use('/auth', require('./authRoutes'));
 
 // Protected routes

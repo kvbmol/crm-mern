@@ -2,18 +2,18 @@ require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/database.js');
 
-const app = express();  // ✅ CREATE APP FIRST
+const app = express();  
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes - ✅ MOUNT AFTER APP CREATED
+// Routes
 app.use('/auth', require('./routes/authRoutes'));
 app.use('/customers', require('./routes/customerRoutes'));
 app.use('/', require('./routes'));
 
-// Health check
+
 app.get('/', (req, res) => {
   res.json({ message: 'CRM Backend Running!' });
 });
